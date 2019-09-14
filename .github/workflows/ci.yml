@@ -1,13 +1,11 @@
 name: CI
 
 on: [push]
-
-paths:
-  - '*'
-  - '!*.md' # Don't run when only markdown files are edited.
-  - '!/docs/*' # Don't run if changes are only in the docs directory.
-
-
+  push:
+    paths:
+      - '*'
+      - '!*.md' # Don't run when only markdown files are edited.
+      - '!/docs/*' # Don't run if changes are only in the docs directory.
 
 jobs:
   build:
