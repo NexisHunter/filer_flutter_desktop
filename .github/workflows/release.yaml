@@ -1,16 +1,16 @@
 name: Release
 
-runs-on: ubuntu-latest
 
-on: []
+on: [release]
 
 job:
   build:
     name: Build
+    runs-on: ubuntu-latest
 
 job:
   name: Publish
   needs: Build
-
+  runs-on: ubuntu-latest
   step:
-    - name: 
+    - name: TEMP
