@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('Setting up FilesBloc', (){
     FilesBloc files;
-    test('Default Setup is empty',(){
+    test('Default Setup is files empty',(){
       files = FilesBloc();
       expect(files.files, []);
     });
