@@ -23,6 +23,7 @@ jobs:
       # Set up flutter on master channel to allow for desktop testing/building
       run: |
         flutter channel master 
+        flutter upgrade
         flutter config --enable-web --enable-linux-desktop
         flutter precache --{web,linux}
         flutter pub get
