@@ -1,0 +1,28 @@
+name: CI
+
+on: [push]
+  push:
+    paths:
+      - '*'
+      - '!*.md' # Don't run when only markdown files are edited.
+      - '!/docs/*' # Don't run if changes are only in the docs directory.
+
+jobs:
+  build:
+    # name: Build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    # TODO: Create Flutter action
+    # - uses: nexishunter/flutter_action@master
+    # - name: Clone the modified dart_codecov_generator
+    #   run: |
+    #     git clone https://github.com/NexisHunter/codecov_generator_dart.git
+    - name: Run the integration tests
+      run: flutter test test/*_test.dart
+    - name: Coveralls Info
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.github_token }}
+        path-to-lcov: ./coverage/lcon.info
