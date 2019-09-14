@@ -19,8 +19,8 @@ dependencies:
   flutter_file_manager: any
   flutter_material_color_picker: any
   coverage: any
-  dart_codecov_generator: 
-    path: ./codecov_generator_dart
+  # dart_codecov_generator: 
+  #   path: ./codecov_generator_dart
 
 dev_dependencies:
   flutter_test:
