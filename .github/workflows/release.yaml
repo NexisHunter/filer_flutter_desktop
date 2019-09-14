@@ -2,7 +2,7 @@ name: Release
 
 runs-on: ubuntu-latest
 
-on: []
+on: [release]
 
 job:
   build:
@@ -13,4 +13,4 @@ job:
   needs: Build
 
   step:
-    - name: 
+    - name: TEMP
