@@ -1,0 +1,16 @@
+name: Release
+
+runs-on: ubuntu-latest
+
+on: []
+
+job:
+  build:
+    name: Build
+
+job:
+  name: Publish
+  needs: Build
+
+  step:
+    - name: 
