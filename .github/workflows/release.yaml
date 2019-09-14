@@ -3,14 +3,10 @@ name: Release
 
 on: [release]
 
-job:
+jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-
-job:
-  name: Publish
-  needs: Build
-  runs-on: ubuntu-latest
-  step:
-    - name: TEMP
+    steps:
+      - name: Building for Android
+        run: echo "Building for Android"
