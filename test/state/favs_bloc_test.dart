@@ -20,7 +20,7 @@ void main(){
         DirectoryItem(root: Directory('${Platform.environment['HOME']}/$fav'))
       ];
       
-      expect(favsBloc.favs, favs);
+      expect(favsBloc.equals(otherFavs: favs), true);
     });
   });
 }
