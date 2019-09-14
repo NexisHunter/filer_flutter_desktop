@@ -97,4 +97,13 @@ class SettingsBloc extends ChangeNotifier {
     _isCreated = prefs['isCreated'] as bool;
     notifyListeners();
   }
+
+  equals(SettingsBloc other){
+    return 
+      this.themeData == other.themeData && 
+      this.scale == other.scale && 
+      this.isCreated == other.isCreated &&
+      this.showFileExtensions == other.showFileExtensions && 
+      this.showHidden == other.showHidden;
+  }
 }

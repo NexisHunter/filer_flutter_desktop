@@ -1,31 +1,15 @@
-// This is a basic Flutter widget test.
-// To perform an interaction with a widget in your test, use the WidgetTester utility that Flutter
-// provides. For example, you can send tap and scroll gestures. You can also use WidgetTester to
-// find child widgets in the widget tree, read text, and verify that the values of widget properties
-// are correct.
+/// This file acts as a runner of the test suite.
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-
-import 'package:filer_flutter_desktop/main.dart';
+import './state/device_bloc_test.dart' as device_bloc;
+import './state/dir_changer_bloc_test.dart' as dir_changer_bloc;
+import './state/favs_bloc_test.dart' as favs_bloc;
+import './state/file_bloc_test.dart' as files_bloc;
+import './state/settings_bloc_test.dart' as settings_bloc;
 
 void main() {
-
-  // testWidgets('Counter increments smoke test', (tester) async {
-  //   // Build our app and trigger a frame.
-  //   await tester.pumpWidget(new MyApp());
-
-  //   // Verify that our counter starts at 0.
-  //   expect(find.text('0'), findsOneWidget);
-  //   expect(find.text('1'), findsNothing);
-
-  //   // Tap the '+' icon and trigger a frame.
-  //   await tester.tap(find.byIcon(Icons.add));
-  //   await tester.pump();
-
-  //   // Verify that our counter has incremented.
-  //   expect(find.text('0'), findsNothing);
-  //   expect(find.text('1'), findsOneWidget);
-  // });
-
+  device_bloc.main();
+  dir_changer_bloc.main();
+  favs_bloc.main();
+  files_bloc.main();
+  settings_bloc.main();
 }
