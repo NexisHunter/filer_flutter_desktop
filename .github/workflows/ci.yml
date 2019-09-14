@@ -28,7 +28,7 @@ jobs:
         flutter precache --{web,linux}
         flutter pub get
     - name: Run the integration tests
-      run: flutter test test/*_test.dart
+      run: flutter test --coverage test/*_test.dart
     - name: Coveralls Info
       uses: coverallsapp/github-action@master
       with:
