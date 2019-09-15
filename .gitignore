@@ -14,3 +14,8 @@ packages
 # Ignore it since it just creates noise. When there's a system in place
 # for versioning this project relative to Flutter, remove this.
 pubspec.lock
+
+codecov_generator_dart/
+coverage/
+# Ignore workflows until OAuth Support is added for Github Actions
+.github/workflows/

@@ -65,4 +65,15 @@ class FavsBloc extends ChangeNotifier {
     _favs = newFavs;
     notifyListeners();
   }
+
+  equals({FavsBloc other, List<DirectoryItem> otherFavs}) {
+    var others = (other != null)? other.favs:otherFavs;
+    bool result = true;
+    if (favs.length != others.length) result = false;
+    final length = favs.length;
+    for(var i=0; i < length; i++){
+      if (favs[i].path != others[i].path) result = false;
+    }
+    return result;
+  }
 }

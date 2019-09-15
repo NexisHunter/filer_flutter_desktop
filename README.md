@@ -1,4 +1,4 @@
-# Filer
+# Filer  [![Coverage Status](https://coveralls.io/repos/github/NexisHunter/filer_flutter_desktop/badge.svg?branch=master)](https://coveralls.io/github/NexisHunter/filer_flutter_desktop?branch=master)
 
 A File Manager Written in Flutter for mobile. 4th year project Course during my time @ Algoma University.
 
