@@ -6,7 +6,7 @@ import 'package:filer_flutter_desktop/state/device_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main(){
-  group('Devices are', (){
+  group('Devices: ', (){
     test('Empty when no devices are attached',(){
       var device = DeviceBloc();
       expect(device.devices.isEmpty, true);
@@ -16,7 +16,7 @@ void main(){
       var mediaDir = Directory('/run/media/${Platform.environment['USER']}');
 
       if (!await mediaDir.exists()){
-        mediaDir.create(recursive: true);
+        await mediaDir.create();
       }
 
       // Creates a temporary device within the test environment
@@ -43,6 +43,6 @@ void main(){
       expect(device.devices, newDevs);
     });
 
-    
+
   });
 }
