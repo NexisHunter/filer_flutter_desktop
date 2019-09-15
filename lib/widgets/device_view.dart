@@ -19,7 +19,7 @@ class DeviceView extends StatelessWidget {
         builder: (context, files, devices, dir, prefs, child) {
       return Column(
         children: <Widget>[
-          for (var device in devices.devices)
+          for (var device in _getDevices(devices.devices))
             Card(
               child: InkWell(
                 child: Row(
@@ -49,7 +49,7 @@ class DeviceView extends StatelessWidget {
   }
 
   List<Device> _getDevices(List<Device> devices) {
-    devices.sort();
+    devices.sort((a,b) => a.compareTo(b));
     return devices;
   }
   // Column(

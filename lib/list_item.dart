@@ -1,14 +1,15 @@
 import 'dart:io';
 
 //----------------------- File System ---------------------------------------\\
-class ListItem extends Comparable<dynamic> {
+class ListItem extends Comparable<ListItem> {
   String name;
   String fileName;
   Type type;
   String path;
   ListItem(this.name, this.type, this.path) : this.fileName = name;
-  int compareTo(covariant ListItem other) {
-    return name.compareTo(other.name);
+  
+  int compareTo(other) {
+    return path.compareTo(other.path);
   }
 
   Map<String, String> toMap() {
@@ -28,6 +29,10 @@ class ListItem extends Comparable<dynamic> {
   rename(String _name) {
     path.replaceAll(fileName, _name);
     name.replaceAll(fileName, _name);
+  }
+
+  equals(ListItem other) {
+    return path == other.path;
   }
 }
 
@@ -119,6 +124,14 @@ class Device {
       type: DeviceType.values[json['type']],
       state: DeviceState.values[json['state']],
       canUnmount: json['canUnmount']);
+  
+  equals(Device other){
+    return path == other.path;
+  }
+
+  compareTo(other){
+    return path.compareTo(other.path);
+  }
 }
 
 enum DeviceState { Mounted, Unmounted }
