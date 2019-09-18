@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: Axosoft/glo-action-create-card@v1
       with:
-        authToken: ${{ secrets.GLO-PAT }}
+        authToken: ${{ secrets.Glo_PAT }}
         boardId: 'XX6qEg_IPwAPxys6'
         name: 'New PR created'
         column: 'TODO'
