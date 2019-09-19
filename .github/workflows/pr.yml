@@ -10,7 +10,7 @@ jobs:
     - uses: Axosoft/glo-action-create-card@v1
       with:
         authToken: ${{ secrets.Glo_PAT }}
-        boardId: 'XYPMoM4GEQAPlDJt'
+        boardId: 'https://app.gitkraken.com/glo/board/XYPMoM4GEQAPlDJt'
         name: 'New PR created'
         column: 'TODO'
         label: 'Bug'
