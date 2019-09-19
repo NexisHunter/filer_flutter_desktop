@@ -1,6 +1,6 @@
 # Filer  [![Coverage Status](https://coveralls.io/repos/github/NexisHunter/filer_flutter_desktop/badge.svg?branch=master)](https://coveralls.io/github/NexisHunter/filer_flutter_desktop?branch=master)
 
-A File Manager Written in Flutter for mobile. 4th year project Course during my time @ Algoma University.
+A File Manager Written in Flutter for mobile. It started as my 4th year project Course during my time @ Algoma University.
 
 ## Introduction
 
@@ -43,7 +43,7 @@ some differences between the Android Os and the port. (In the realm of user inte
     - [x] Add File
     - [x] Remove File
     - [ ] Copy File
-    - [ ] Rename File
+    - [X] Rename File
     - [x] Create File
   - [ ] tab/simultaneous directory viewing
 - [x] Data Persistence
@@ -54,14 +54,17 @@ some differences between the Android Os and the port. (In the realm of user inte
 
 - [ ] Unit Tests
   - [ ] Favourites Menu
+    - [X] State
     - [ ] Base Layout
     - [ ] Add Favourite
     - [ ] Remove Favourite
   - [ ] Device List
+    - [X] State
     - [ ] Base Layout
     - [ ] Eject
     - [ ] Mount
   - [ ] Files List
+    - [ ] State
     - [ ] Base Layout
     - [ ] List all files (in a given directory)
     - [ ] Icon based on mime-type
@@ -76,7 +79,6 @@ some differences between the Android Os and the port. (In the realm of user inte
 - [ ] Finish Device List
   - [ ] Mount / Eject
 - [ ] Finish Files View Context functions
-  - [ ] Rename
   - [ ] Copy
 - [ ] Allow for auto rotation
 - [ ] Files List

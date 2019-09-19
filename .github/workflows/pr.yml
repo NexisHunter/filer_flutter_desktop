@@ -1,0 +1,17 @@
+on: pull_request
+
+name: Pull Request Creation
+
+jobs:
+  build:
+    name: Glo Card Creation
+    runs-on: ubuntu-latest
+    steps:
+    - uses: Axosoft/glo-action-create-card@v1
+      with:
+        authToken: ${{ secrets.Glo_PAT }}
+        boardId: 'XX6qEg_IPwAPxys6'
+        name: 'New PR created'
+        column: 'TODO'
+        label: 'Bug'
+      id: glo-create
