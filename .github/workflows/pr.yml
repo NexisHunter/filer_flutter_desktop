@@ -12,6 +12,6 @@ jobs:
         authToken: ${{ secrets.Glo_PAT }}
         boardId: 'https://app.gitkraken.com/glo/board/XYPMoM4GEQAPlDJt'
         name: 'New PR created'
-        column: 'TODO'
+        column: 'Open'
         label: 'Bug'
       id: glo-create
