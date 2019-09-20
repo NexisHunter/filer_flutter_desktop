@@ -1,17 +1,17 @@
-on: pull_request
+# on: pull_request
 
-name: Pull Request Creation
+# name: Pull Request Creation
 
-jobs:
-  build:
-    name: Glo Card Creation
-    runs-on: ubuntu-latest
-    steps:
-    - uses: Axosoft/glo-action-create-card@v1
-      with:
-        authToken: ${{ secrets.Glo_PAT }}
-        boardId: 'https://app.gitkraken.com/glo/board/XYPMoM4GEQAPlDJt'
-        name: 'New PR created'
-        column: 'Open'
-        label: 'Bug'
-      id: glo-create
+# jobs:
+#   build:
+#     name: Glo Card Creation
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: Axosoft/glo-action-create-card@v1
+#       with:
+#         authToken: ${{ secrets.Glo_PAT }}
+#         boardId: 'https://app.gitkraken.com/glo/board/XYPMoM4GEQAPlDJt'
+#         name: 'New PR created'
+#         column: 'Open'
+#         label: 'Bug'
+#       id: glo-create
