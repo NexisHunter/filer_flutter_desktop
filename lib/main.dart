@@ -43,40 +43,40 @@ main() async {
     favs.fromMap(userSettings['favs']['favourites']);
   }
 
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<SettingsBloc>.value(
-          value: prefs,
-        ),
-        ChangeNotifierProvider<FavsBloc>.value(
-          value: favs,
-        ),
-        ChangeNotifierProvider<FilesBloc>.value(
-          value: FilesBloc(),
-        ),
-        ChangeNotifierProvider<DeviceBloc>.value(
-          value: DeviceBloc(),
-        ),
-        ChangeNotifierProvider<DirChangerBloc>.value(
-          value: DirChangerBloc(),
-        ),
-      ],
-      child: MyApp(),
-    ),
-  );
+  runApp(MyApp(prefs, favs));
 }
 
 class MyApp extends StatelessWidget {
+  final SettingsBloc prefs;
+  final FavsBloc favs;
+  MyApp(this.prefs, this.favs);
   @override
   Widget build(BuildContext context) {
-    return Consumer<SettingsBloc>(
-      builder: (context, prefs, child) => MaterialApp(
-        title: 'Filer Flutter',
-        theme: prefs.themeData,
-        home: MyHomePage(title: 'Filer Flutter'),
-      ),
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<SettingsBloc>.value(
+            value: prefs,
+          ),
+          ChangeNotifierProvider<FavsBloc>.value(
+            value: favs,
+          ),
+          ChangeNotifierProvider<FilesBloc>.value(
+            value: FilesBloc(),
+          ),
+          ChangeNotifierProvider<DeviceBloc>.value(
+            value: DeviceBloc(),
+          ),
+          ChangeNotifierProvider<DirChangerBloc>.value(
+            value: DirChangerBloc(),
+          ),
+        ],
+        child: Consumer<SettingsBloc>(
+          builder: (context, prefs, child) => MaterialApp(
+            title: 'Filer Flutter',
+            theme: prefs.themeData,
+            home: MyHomePage(title: 'Filer Flutter'),
+          ),
+        ));
   }
 }
 

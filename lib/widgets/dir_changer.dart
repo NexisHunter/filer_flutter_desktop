@@ -4,9 +4,6 @@ import 'package:filer_flutter_desktop/state/dir_changer_bloc.dart';
 import 'package:filer_flutter_desktop/state/file_bloc.dart';
 import 'package:filer_flutter_desktop/state/settings_bloc.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_filer/blocs/dir_changer_bloc.dart';
-// import 'package:flutter_filer/blocs/file_bloc.dart';
-// import 'package:flutter_filer/blocs/settings_bloc.dart';
 import 'package:provider/provider.dart';
 
 class DirChanger extends StatefulWidget {
@@ -26,19 +23,15 @@ class _DirChangeState extends State<DirChanger> {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: <Widget>[
-              if (dir.root != null && ((dir.root.path != '/storage' && Platform.isAndroid) ||
-                  dir.root.path != '/'))
+              if (dir.root != null &&
+                  ((dir.root.path != '/storage' && Platform.isAndroid) ||
+                      dir.root.path != '/'))
                 Consumer2<FilesBloc, SettingsBloc>(
                     builder: (context, files, prefs, child) => IconButton(
                           icon: Icon(Icons.navigate_before),
                           onPressed: () {
-                            print(dir.root.parent.path);
-                            print(dir.root.parent.parent.path);
-                            // if (dirField.text != '/storage/emulated/0')
                             dir.previous = dir.root;
                             dir.root = dir.root.parent;
-                            // else
-                            //   dir.root = Directory('/storage');
                             files.updateFiles(dir.root, prefs.showHidden);
                             dirField.text = dir.pwd;
                             FocusScope.of(context).requestFocus(FocusNode());
@@ -48,8 +41,10 @@ class _DirChangeState extends State<DirChanger> {
                 child: TextField(
                   controller: dirField,
                   onTap: () => setState(() {
-                    textFlex =
-                        4; // Used to allow for a large view when using mobile devices or on smaller tablets that don't have much screen realestate
+                    textFlex = 4;
+                    // Used to allow for a large view when using mobile devices
+                    // or on smaller tablets that don't have much screen
+                    // realestate
                   }),
                 ),
               ),

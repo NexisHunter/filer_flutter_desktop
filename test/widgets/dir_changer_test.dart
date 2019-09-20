@@ -1,11 +1,45 @@
+import 'dart:io';
+
+import 'package:filer_flutter_desktop/main.dart';
+import 'package:filer_flutter_desktop/state/favs_bloc.dart';
+import 'package:filer_flutter_desktop/state/settings_bloc.dart';
 import 'package:filer_flutter_desktop/widgets/dir_changer.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('Set up DirChanger', () {
-    DirChanger changer;
-    test('Default', () {
-      changer = DirChanger();
+  group('DirChanger ', () {
+    // DirChanger changer;
+    var myApp = MyApp(SettingsBloc(), FavsBloc());
+    testWidgets('Home in Address Bar Upon Start', (tester) async {
+      await tester.pumpWidget(myApp);
+
+      expect(find.text(Platform.environment['HOME']), findsOneWidget);
+    });
+    testWidgets('Remove the back button at root of device', (tester) async {
+      await tester.pumpWidget(myApp);
+
+      var icon = Icons.navigate_before;
+      // Navigate to Root
+      await tester.tap(find.byIcon(icon));
+      await tester.pump();
+      await tester.tap(find.byIcon(icon));
+      await tester.pump();
+
+      expect(find.text('/'), findsOneWidget);
+      expect(find.byIcon(icon), findsNothing);
+    });
+    testWidgets(
+        'Clicking the forward button without changing the directory does nothing.',
+        (tester) async {
+      await tester.pumpWidget(myApp);
+      var icon = Icons.navigate_next;
+
+      // Click the next button
+      await tester.tap(find.byIcon(icon));
+      await tester.pump();
+
+      expect(find.text(Platform.environment['HOME']), findsOneWidget);
     });
   });
 }
