@@ -43,6 +43,34 @@ void main() {
         }
         expect(matches, isTrue);
       });
+
+      test('showing hidden files', () async {
+        files = FilesBloc();
+        var current = Directory.current;
+        await files.updateFiles(current, true);
+
+        var pwdList = current.listSync();
+        var list = <ListItem>[];
+
+        for (var item in pwdList) {
+          // if (_getName(item.path).startsWith('.')) continue;
+          list.add((await FileSystemEntity.isDirectory(item.path))
+              ? DirectoryItem(root: Directory(item.path))
+              : FileItem(file: File(item.path)));
+        }
+
+        files.files.sort((a, b) => a.compareTo(b));
+        list.sort((a, b) => a.compareTo(b));
+
+        var matches = files.files.length == list.length;
+        if (matches) {
+          for (var i = 0; i < files.files.length; i++) {
+            matches = files.files[i].path == list[i].path;
+          }
+        }
+        expect(matches, isTrue);
+      });
+
     });
   });
 }

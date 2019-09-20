@@ -4,17 +4,27 @@ import 'package:filer_flutter_desktop/list_item.dart';
 import 'package:flutter/material.dart';
 
 class FavsBloc extends ChangeNotifier {
-  FavsBloc();
-  List<DirectoryItem> _favs = [
-    for (var fav in <String>[
-      'Documents',
-      'Downloads',
-      'Music',
-      'Pictures',
-      'Videos'
-    ])
-      DirectoryItem(root: Directory('${Platform.environment['HOME']}/$fav'))
-  ];
+  FavsBloc() {
+    _favs = [
+      for (var fav in <String>[
+        'Documents',
+        'Downloads',
+        'Music',
+        'Pictures',
+        'Videos'
+      ])
+        DirectoryItem(root: Directory('${Platform.environment['HOME']}/$fav'))
+    ];
+  }
+
+
+  FavsBloc.fromMap(Map<String, String> json) {
+    for (var key in json.keys) {
+      _favs.add(DirectoryItem(root: Directory(json[key])));
+    }
+  }
+
+  List<DirectoryItem> _favs = [];
   List<DirectoryItem> get favs => _favs;
   set favs(List<DirectoryItem> nfvs) {
     _favs = nfvs;
@@ -67,11 +77,11 @@ class FavsBloc extends ChangeNotifier {
   }
 
   equals({FavsBloc other, List<DirectoryItem> otherFavs}) {
-    var others = (other != null)? other.favs:otherFavs;
+    var others = (other != null) ? other.favs : otherFavs;
     bool result = true;
     if (favs.length != others.length) result = false;
     final length = favs.length;
-    for(var i=0; i < length; i++){
+    for (var i = 0; i < length; i++) {
       if (favs[i].path != others[i].path) result = false;
     }
     return result;

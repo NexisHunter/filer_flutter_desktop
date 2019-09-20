@@ -30,8 +30,7 @@ void main(){
         'fontFamily': 'Roboto'
       }; 
 
-      var settings = new SettingsBloc();
-      settings.fromMap(map);
+      var settings = SettingsBloc.fromMap(map);
 
       expect(settings.toMap(),map);
     });
