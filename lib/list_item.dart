@@ -7,7 +7,7 @@ class ListItem extends Comparable<ListItem> {
   Type type;
   String path;
   ListItem(this.name, this.type, this.path) : this.fileName = name;
-  
+
   int compareTo(other) {
     return path.compareTo(other.path);
   }
@@ -26,6 +26,11 @@ class ListItem extends Comparable<ListItem> {
         json['name'], Type.values[json['type'] as int], json['path']);
   }
 
+  ListItem.fromMap(Map<String, dynamic> json) {
+    name = json['name'];
+    type = Type.values[json['type'] as int];
+    path = json['path'];
+  }
   rename(String _name) {
     path.replaceAll(fileName, _name);
     name.replaceAll(fileName, _name);
@@ -120,16 +125,16 @@ class Device {
   }
 
   fromMap(Map<String, dynamic> json) => Device(
-      path:json['root'],
+      path: json['root'],
       type: DeviceType.values[json['type']],
       state: DeviceState.values[json['state']],
       canUnmount: json['canUnmount']);
-  
-  equals(Device other){
+
+  equals(Device other) {
     return path == other.path;
   }
 
-  compareTo(other){
+  compareTo(other) {
     return path.compareTo(other.path);
   }
 }
