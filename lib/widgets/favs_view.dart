@@ -3,10 +3,6 @@ import 'package:filer_flutter_desktop/state/favs_bloc.dart';
 import 'package:filer_flutter_desktop/state/file_bloc.dart';
 import 'package:filer_flutter_desktop/state/settings_bloc.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_filer/blocs/dir_changer_bloc.dart';
-// import 'package:flutter_filer/blocs/favs_bloc.dart';
-// import 'package:flutter_filer/blocs/file_bloc.dart';
-// import 'package:flutter_filer/blocs/settings_bloc.dart';
 import 'package:provider/provider.dart';
 
 class FavsView extends StatelessWidget {
