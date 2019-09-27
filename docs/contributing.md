@@ -24,10 +24,29 @@ https://app.gitkraken.com/glo/board/XYPMoM4GEQAPlDJt
 Once ready for review @nexishunter.
 
 ## Areas of Affect
+<!-- Adjust me Upon Closure of PRs-->
+| Area          | Code | Current Number |
+| :------------ | :--- | :------------- |
+| Documentation | DOC  | 2              |
+| Testing       | T    | 2              |
+| Performance   | PERF | 0              |
+| UI            | UI   | 0              |
 
-| Area | Code | Current Number |
-|:---|:---|:---|
-Documentation | DOC | 1
-Testing | T | 2
-Performance | PERF | 0
-UI | UI | 0
+## Getting Setup
+
+*Note*: This assumes that you're downloading flutter from [here](flutter.dev).
+- Install flutter as per you're operating system.
+- Change to channel flutter by running `flutter channel master`
+- Run `flutter upgrade`
+- Run 
+- Run `flutter precache --{linux,macos,windows}`, add ios or android as needed, generally not necessary.
+
+## Running Tests
+With coverage, if you know how to/ are looking to process the info, note don't commit the lcov.info. To
+achieve this run:
+
+    `flutter test --coverage test/*_test.dart`
+
+This runs all of the test suites, with coverage. To run specific tests run:
+
+    `flutter test /path/to/test`
