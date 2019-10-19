@@ -1,21 +1,21 @@
 import 'dart:io';
 
-import 'package:filer_flutter_desktop/state/dir_changer_bloc.dart';
-import 'package:filer_flutter_desktop/state/file_bloc.dart';
-import 'package:filer_flutter_desktop/state/settings_bloc.dart';
+import 'package:filer_flutter_desktop/state/dir_changer.dart';
+import 'package:filer_flutter_desktop/state/files.dart';
+import 'package:filer_flutter_desktop/state/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class DirChanger extends StatefulWidget {
+class DirChangerView extends StatefulWidget {
   _DirChangeState createState() => _DirChangeState();
 }
 
-class _DirChangeState extends State<DirChanger> {
+class _DirChangeState extends State<DirChangerView> {
   final dirField = TextEditingController();
   var textFlex = 1;
   @override
   Widget build(BuildContext context) {
-    return Consumer<DirChangerBloc>(builder: (context, dir, child) {
+    return Consumer<DirChanger>(builder: (context, dir, child) {
       dirField.text = dir.pwd;
       return Expanded(
         flex: textFlex,
@@ -26,7 +26,7 @@ class _DirChangeState extends State<DirChanger> {
               if (dir.root != null &&
                   ((dir.root.path != '/storage' && Platform.isAndroid) ||
                       dir.root.path != '/'))
-                Consumer2<FilesBloc, SettingsBloc>(
+                Consumer2<Files, Settings>(
                     builder: (context, files, prefs, child) => IconButton(
                           icon: Icon(Icons.navigate_before),
                           onPressed: () {
@@ -48,7 +48,7 @@ class _DirChangeState extends State<DirChanger> {
                   }),
                 ),
               ),
-              Consumer2<FilesBloc, SettingsBloc>(
+              Consumer2<Files, Settings>(
                   builder: (conetxt, files, prefs, child) => IconButton(
                         icon: Icon(Icons.navigate_next),
                         onPressed: () {

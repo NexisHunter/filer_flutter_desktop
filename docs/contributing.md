@@ -27,7 +27,7 @@ Once ready for review @nexishunter.
 <!-- Adjust me Upon Closure of PRs-->
 | Area          | Code | Current Number |
 | :------------ | :--- | :------------- |
-| Documentation | DOC  | 2              |
+| Documentation & Refacters| DOC  | 3              |
 | Testing       | T    | 2              |
 | Performance   | PERF | 0              |
 | UI            | UI   | 0              |
@@ -38,8 +38,8 @@ Once ready for review @nexishunter.
 - Install flutter as per you're operating system.
 - Change to channel flutter by running `flutter channel master`
 - Run `flutter upgrade`
-- Run 
-- Run `flutter precache --{linux,macos,windows}`, add ios or android as needed, generally not necessary.
+- Run `flutter config --enable-{your os here}-desktop` *Possible Os:* linux, macos, windows
+- Run `flutter precache --{your os here}`
 
 ## Running Tests
 With coverage, if you know how to/ are looking to process the info, note don't commit the lcov.info. To

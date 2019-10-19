@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:filer_flutter_desktop/custom_icons_icons.dart';
-import 'package:filer_flutter_desktop/state/dir_changer_bloc.dart';
-import 'package:filer_flutter_desktop/state/favs_bloc.dart';
-import 'package:filer_flutter_desktop/state/file_bloc.dart';
-import 'package:filer_flutter_desktop/state/settings_bloc.dart';
+import 'package:filer_flutter_desktop/state/dir_changer.dart';
+import 'package:filer_flutter_desktop/state/favs.dart';
+import 'package:filer_flutter_desktop/state/files.dart';
+import 'package:filer_flutter_desktop/state/settings.dart';
 import 'package:filer_flutter_desktop/list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,7 @@ class _FilesViewState extends State<FilesView> {
   Widget build(BuildContext context) {
     Offset _tapPos;
     var overlay;
-    return Consumer4<FilesBloc, DirChangerBloc, SettingsBloc, FavsBloc>(
+    return Consumer4<Files, DirChanger, Settings, Favs>(
         builder: (context, files, dir, prefs, favs, child) {
       final grid = SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 60 * prefs.scale * 1.25,
@@ -279,10 +279,9 @@ class _FilesViewState extends State<FilesView> {
     return Icon(iconImage);
   }
 
-  bool _notInFavs(ListItem item, FavsBloc favs) {
+  bool _notInFavs(ListItem item, Favs favs) {
     if (item.type != Type.Folder) return false;
-    final condition = favs.contains(item);
-    return item.type == Type.Folder && condition != 0;
+    return item.type == Type.Folder && favs.contains(item);
   }
 
   /// Displays a dialog to rename the file.

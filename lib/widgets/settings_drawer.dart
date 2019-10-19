@@ -1,20 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:filer_flutter_desktop/state/dir_changer_bloc.dart';
-import 'package:filer_flutter_desktop/state/favs_bloc.dart';
-import 'package:filer_flutter_desktop/state/file_bloc.dart';
-import 'package:filer_flutter_desktop/state/settings_bloc.dart';
+import 'package:filer_flutter_desktop/state/dir_changer.dart';
+import 'package:filer_flutter_desktop/state/favs.dart';
+import 'package:filer_flutter_desktop/state/files.dart';
+import 'package:filer_flutter_desktop/state/settings.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_filer/blocs/dir_changer_bloc.dart';
-// import 'package:flutter_filer/blocs/favs_bloc.dart';
-// import 'package:flutter_filer/blocs/file_bloc.dart';
-// import 'package:flutter_filer/blocs/settings_bloc.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:provider/provider.dart';
-// import 'package:sembast/sembast.dart';
-// import 'package:sqflite/sqflite.dart' as sqflite;
-// import 'package:sembast/sembast_io.dart';
+
+import 'package:filer_flutter_desktop/utils.dart';
 
 class SettingsDrawer extends StatefulWidget {
   _SettingsDrawerState createState() => _SettingsDrawerState();
@@ -23,7 +18,7 @@ class SettingsDrawer extends StatefulWidget {
 class _SettingsDrawerState extends State<SettingsDrawer> {
   @override
   Widget build(BuildContext context) {
-    return Consumer4<SettingsBloc, FilesBloc, DirChangerBloc, FavsBloc>(
+    return Consumer4<Settings, Files, DirChanger, Favs>(
         builder: (context, prefs, files, dir, favs, child) => ListView(
               padding: EdgeInsets.zero,
               children: <Widget>[
@@ -117,8 +112,12 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                             circleSize: 75 * (prefs.scale),
                             onColorChange: (color) {
                               prefs.themeData = ThemeData(
-                                  primaryColor: color,
-                                  primarySwatch: _toSwatch(color.value));
+                                primaryColor: color,
+                                primarySwatch: MaterialColor(
+                                  color.value,
+                                  toSwatch(color.value),
+                                ),
+                              );
                             },
                             onMainColorChange: (ColorSwatch color) {
                               prefs.themeData = ThemeData(
@@ -139,17 +138,23 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                             circleSize: 75 * (prefs.scale),
                             onColorChange: (Color color) {
                               prefs.themeData = ThemeData(
-                                  primaryColor: prefs.themeData.primaryColor,
-                                  accentColor: color,
-                                  primarySwatch: _toSwatch(
-                                      prefs.themeData.primaryColor.value));
+                                primaryColor: prefs.themeData.primaryColor,
+                                accentColor: color,
+                                primarySwatch: MaterialColor(
+                                  color.value,
+                                  toSwatch(color.value),
+                                ),
+                              );
                             },
                             onMainColorChange: (ColorSwatch color) {
                               prefs.themeData = ThemeData(
-                                  primaryColor: prefs.themeData.primaryColor,
-                                  accentColor: color,
-                                  primarySwatch: _toSwatch(
-                                      prefs.themeData.primaryColor.value));
+                                primaryColor: prefs.themeData.primaryColor,
+                                accentColor: color,
+                                primarySwatch: MaterialColor(
+                                  color.value,
+                                  toSwatch(color.value),
+                                ),
+                              );
                             },
                             selectedColor: prefs.themeData.accentColor,
                           )
@@ -166,19 +171,25 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                             circleSize: 75 * (prefs.scale),
                             onColorChange: (Color color) {
                               prefs.themeData = ThemeData(
-                                  primaryColor: prefs.themeData.primaryColor,
-                                  accentColor: prefs.themeData.accentColor,
-                                  splashColor: color,
-                                  primarySwatch: _toSwatch(
-                                      prefs.themeData.primaryColor.value));
+                                primaryColor: prefs.themeData.primaryColor,
+                                accentColor: prefs.themeData.accentColor,
+                                splashColor: color,
+                                primarySwatch: MaterialColor(
+                                  color.value,
+                                  toSwatch(color.value),
+                                ),
+                              );
                             },
                             onMainColorChange: (ColorSwatch color) {
                               prefs.themeData = ThemeData(
-                                  primaryColor: prefs.themeData.primaryColor,
-                                  accentColor: prefs.themeData.accentColor,
-                                  splashColor: color,
-                                  primarySwatch: _toSwatch(
-                                      prefs.themeData.primaryColor.value));
+                                primaryColor: prefs.themeData.primaryColor,
+                                accentColor: prefs.themeData.accentColor,
+                                splashColor: color,
+                                primarySwatch: MaterialColor(
+                                  color.value,
+                                  toSwatch(color.value),
+                                ),
+                              );
                             },
                             selectedColor: prefs.themeData.splashColor,
                           )
@@ -193,34 +204,11 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
             ));
   }
 
-  _save(FavsBloc favs, SettingsBloc prefs) async {
-    final file =
-        File('${Platform.environment['HOME']}/.flutter_filer_desktop.json');
+  _save(Favs favs, Settings prefs) async {
+    final file = File('${prefs.home}.flutter_filer_desktop.json');
     final toUse = await file.create();
 
-    await toUse.writeAsString('{ "prefs" : ${json.encode(prefs.toMap())}, "favs" : ${json.encode(favs.toMap())} }');
-    // final dbPath = await sqflite.getDatabasesPath() + 'user_prefs.db';
-    // Database db = await databaseFactoryIo.openDatabase(dbPath);
-    // // Single write
-    // await db.transaction((write) async {
-    //   await write.put(prefs.toMap(), 'settings');
-    //   await write.put(favs.toMap(), 'favourites');
-    // });
-  }
-
-  _toSwatch(int color) {
-    final c = Color(color);
-    return MaterialColor(color, {
-      50: Color.fromRGBO(c.red, c.green, c.blue, .1),
-      100: Color.fromRGBO(c.red, c.green, c.blue, .2),
-      200: Color.fromRGBO(c.red, c.green, c.blue, .3),
-      300: Color.fromRGBO(c.red, c.green, c.blue, .4),
-      400: Color.fromRGBO(c.red, c.green, c.blue, .5),
-      500: Color.fromRGBO(c.red, c.green, c.blue, .6),
-      600: Color.fromRGBO(c.red, c.green, c.blue, .7),
-      700: Color.fromRGBO(c.red, c.green, c.blue, .8),
-      800: Color.fromRGBO(c.red, c.green, c.blue, .9),
-      900: Color.fromRGBO(c.red, c.green, c.blue, 1)
-    });
+    await toUse.writeAsString(
+        '{ "prefs" : ${json.encode(prefs.toMap())}, "favs" : ${json.encode(favs.toMap())} }');
   }
 }

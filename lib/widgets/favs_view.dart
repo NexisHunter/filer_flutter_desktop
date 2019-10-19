@@ -1,14 +1,14 @@
-import 'package:filer_flutter_desktop/state/dir_changer_bloc.dart';
-import 'package:filer_flutter_desktop/state/favs_bloc.dart';
-import 'package:filer_flutter_desktop/state/file_bloc.dart';
-import 'package:filer_flutter_desktop/state/settings_bloc.dart';
+import 'package:filer_flutter_desktop/state/dir_changer.dart';
+import 'package:filer_flutter_desktop/state/favs.dart';
+import 'package:filer_flutter_desktop/state/files.dart';
+import 'package:filer_flutter_desktop/state/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class FavsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer4<FilesBloc, DirChangerBloc, SettingsBloc, FavsBloc>(
+    return Consumer4<Files, DirChanger, Settings, Favs>(
         builder: (context, files, dir, prefs, favs, child) => Container(
                 child: Column(
               children: <Widget>[
