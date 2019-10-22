@@ -1,24 +1,25 @@
 import 'dart:io';
 
 import 'package:filer_flutter_desktop/list_item.dart';
-import 'package:filer_flutter_desktop/state/file_bloc.dart';
+import 'package:filer_flutter_desktop/state/files.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   _runCommand(String cmd, List<String> args) => Process.run(cmd, args);
-  _getName(String file) => file.substring(file.lastIndexOf('/') + 1);
+  _getName(String file) =>
+      file.substring(file.lastIndexOf(Platform.pathSeparator) + 1);
 
-  group('Setting up FilesBloc', () {
-    FilesBloc files;
+  group('Setting up Files', () {
+    Files files;
     test('Default Setup is files empty', () {
-      files = FilesBloc();
+      files = Files();
       expect(files.files, []);
     });
 
     group('Updates files on directory Change with ', () {
-      files = FilesBloc();
+      files = Files();
       test('not showing hidden files', () async {
-        files = FilesBloc();
+        files = Files();
         var current = Directory.current;
         await files.updateFiles(current, false);
 
@@ -45,7 +46,7 @@ void main() {
       });
 
       test('showing hidden files', () async {
-        files = FilesBloc();
+        files = Files();
         var current = Directory.current;
         await files.updateFiles(current, true);
 
@@ -70,7 +71,6 @@ void main() {
         }
         expect(matches, isTrue);
       });
-
     });
   });
 }
