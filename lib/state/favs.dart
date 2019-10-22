@@ -18,7 +18,8 @@ class Favs extends ChangeNotifier {
             'Videos'
           ])
             DirectoryItem(
-                root: Directory('${Platform.environment['HOME']}/$fav'))
+                root: Directory(
+                    '${Platform.environment['HOME']}${Platform.pathSeparator}$fav'))
         ];
 
   /// Builds the favourites list based off of the user's saved preferences.

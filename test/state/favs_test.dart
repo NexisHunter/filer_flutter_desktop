@@ -20,11 +20,12 @@ void main() {
       var favsList = <DirectoryItem>[
         for (var fav in defaults)
           DirectoryItem(
-              root: Directory(
-                  '${Platform.environment['HOME']}${Platform.pathSeparator}$fav'))
+            root: Directory(
+                '${Platform.environment['HOME']}${Platform.pathSeparator}$fav'),
+          ),
       ];
-
-      expect(favs.favs == favsList, isTrue);
+      var favs2 = Favs()..favs = favsList;
+      expect(favs == favs2, isTrue);
     });
     test('From Map', () {
       var favsMap = <String, String>{'Home': Platform.environment['HOME']};
