@@ -107,14 +107,15 @@ class _DirChangeState extends State<DirChangerView> {
       // Handle nav back to parent.
       if (curr.path == dirField.text) {
         if (curr.parent != null) {
-          if (dir.previous.path == curr.path || dir.previous == null) {
-            dir.root = curr.parent;
-            dir.previous = curr;
-          } else {
-            print(dir.previous.path);
-            dir.root = dir.previous;
-            dir.previous = curr;
-          }
+          // TODO: Re-enable when history is increased.
+          // if (dir.previous.path == curr.path) {
+          dir.root = curr.parent;
+          dir.previous = curr;
+          // } else {
+          //   print(dir.previous.path);
+          //   dir.root = dir.previous;
+          //   dir.previous = curr;
+          // }
         }
       }
     } else {

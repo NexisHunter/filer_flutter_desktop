@@ -79,7 +79,8 @@ void main() {
       favsList.remove(toRemove);
       favsList.sort((a, b) => a.compareTo(b));
       favs.unpin(toRemove);
-      expect(favs.favs == favsList, isTrue);
+      var favs2 = Favs()..favs = favsList;
+      expect(favs == favs2, isTrue);
     });
     test('Contains', () {
       favs = Favs();
