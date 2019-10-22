@@ -81,7 +81,14 @@ void main() {
         var newPath =
             '${Platform.environment['HOME']}${Platform.pathSeparator}$newName';
 
+        // var callback = expectAsync2((file, name) {
+        //   file.rename(name);
+        // });
+
         file.rename(newName);
+
+        // callback(file, newName);
+
         expect(file.path, newPath);
       });
     });

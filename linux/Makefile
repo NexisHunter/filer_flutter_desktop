@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Executable name.
-BINARY_NAME=flutter_desktop_example
+BINARY_NAME=Filer
 # Any extra source files to build.
 EXTRA_SOURCES=
 # Paths of any additional libraries to be bundled in the output directory.
@@ -41,7 +41,7 @@ FLUTTER_APP_DIR=$(CURDIR)/..
 FLUTTER_APP_BUILD_DIR=$(FLUTTER_APP_DIR)/build
 
 OUT_DIR=$(FLUTTER_APP_BUILD_DIR)/linux
-OBJ_DIR=$(OUT_DIR)/obj
+OBJ_DIR=$(OUT_DIR)/obj/$(BUILD)
 
 # Libraries
 FLUTTER_LIB_NAME=flutter_linux_glfw

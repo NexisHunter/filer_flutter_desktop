@@ -22,7 +22,7 @@ class Favs extends ChangeNotifier {
         ];
 
   /// Builds the favourites list based off of the user's saved preferences.
-  Favs.fromMap(Map<String, String> json) {
+  Favs.fromMap(Map<String, dynamic> json) {
     for (var key in json.keys) {
       _favs.add(DirectoryItem(root: Directory(json[key])));
     }
@@ -68,7 +68,7 @@ class Favs extends ChangeNotifier {
   /// [sort] - Sorts the directories based off of the preferred setting.
   /// Default -> Alphabetically.
   void sort() {
-    // TODO: Add other moethods of sorting.
+    // TODO: Add other methods of sorting.
     _favs.sort((a, b) => a.compareTo(b));
     notifyListeners();
   }

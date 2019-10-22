@@ -47,10 +47,8 @@ class ListItem extends Comparable<ListItem> {
     name = _name;
   }
 
-  @override
   operator ==(other) => path == other.path;
 
-  @override
   int get hashCode => super.hashCode;
 }
 
@@ -136,11 +134,8 @@ class Device {
     };
   }
 
-  @override
+  // ignore: hash_and_equals
   operator ==(other) => path == other.path;
-
-  @override
-  int hashCode() => super.hashCode;
 
   int compareTo(other) {
     return path.compareTo(other.path);

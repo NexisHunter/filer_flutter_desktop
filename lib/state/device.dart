@@ -23,9 +23,9 @@ class Devices extends ChangeNotifier {
   List<Device> get devices => _devices;
   set devices(List<Device> devs) {
     for (var device in devs) {
-      if (device.name == '0') device.name = 'This';
+      if (device.name == '0' && Platform.isAndroid) device.name = 'This';
     }
-    devs.sort();
+    devs.sort((a, b) => a.compareTo(b));
     _devices = devs;
     notifyListeners();
   }

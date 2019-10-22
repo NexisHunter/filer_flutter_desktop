@@ -42,3 +42,18 @@ String getName({File file, Directory dir, String filePath}) {
   }
   return path.substring(path.lastIndexOf(Platform.pathSeparator) + 1);
 }
+
+extension TextController on TextEditingController {
+  void setCursor(String text, int pos) {
+    value = value.copyWith(
+      text: text,
+      selection: TextSelection.collapsed(
+        offset: pos,
+      ),
+      composing: TextRange(
+        start: pos,
+        end: pos,
+      ),
+    );
+  }
+}

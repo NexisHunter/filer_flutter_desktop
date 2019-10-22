@@ -32,15 +32,25 @@ class Settings extends ChangeNotifier {
   /// The theme to be applied to the application.
   ///
   /// [themeData] - The theme that is applied to the application.
-  ThemeData _themeData = ThemeData(
+  static ThemeData _themeData = ThemeData(
     primarySwatch: Colors.green,
     fontFamily: 'Roboto',
   );
   ThemeData get themeData => _themeData;
   set themeData(ThemeData themedata) {
     _themeData = themedata;
+    _colors[0] = themeData.primaryColor;
+    _colors[1] = themeData.accentColor;
+    _colors[2] = themeData.splashColor;
     notifyListeners();
   }
+
+  List<Color> _colors = [
+    _themeData.primaryColor,
+    _themeData.accentColor,
+    _themeData.splashColor
+  ];
+  List<Color> get colors => _colors;
 
   /// When enabled displays the hidden files.
   ///
@@ -61,12 +71,17 @@ class Settings extends ChangeNotifier {
     Brightness _brightness;
     (darkMode) ? _brightness = Brightness.dark : _brightness = Brightness.light;
     themeData = ThemeData(
-        brightness: _brightness,
-        primarySwatch: MaterialColor(
-          _themeData.primaryColor.value,
-          toSwatch(_themeData.primaryColor.value),
-        ),
-        fontFamily: 'Roboto');
+      primaryColor: _themeData.primaryColor,
+      brightness: _brightness,
+      primarySwatch: MaterialColor(
+        _themeData.primaryColor.value,
+        toSwatch(_themeData.primaryColor.value),
+      ),
+      accentColor: _themeData.accentColor,
+      accentColorBrightness: _themeData.accentColorBrightness,
+      splashColor: _themeData.splashColor,
+      fontFamily: 'Roboto',
+    );
   }
 
   /// When enabled display the file extensions.
