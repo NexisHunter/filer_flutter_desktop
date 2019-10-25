@@ -27,7 +27,7 @@ Once ready for review @nexishunter.
 <!-- Adjust me Upon Closure of PRs-->
 | Area          | Code | Current Number |
 | :------------ | :--- | :------------- |
-| Documentation & Refacters| DOC  | 3              |
+| Documentation & Refacters| DOC  | 4              |
 | Testing       | T    | 2              |
 | Performance   | PERF | 0              |
 | UI            | UI   | 0              |
