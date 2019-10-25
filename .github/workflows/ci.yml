@@ -1,37 +1,43 @@
 name: CI
 
-on: [ 'push' ]
-#   push:
-#     paths:
-#       - '*'
-#       - '!*.md' # Don't run when only markdown files are edited.
-#       - '!/docs/*' # Don't run if changes are only in the docs directory.
+on:
+  push:
+    paths: 
+      - '*'
+      - '!*.md'
+      - '!/docs/*'
 
 jobs:
-  build:
-    # name: Build
     runs-on: ubuntu-latest
+
+    build:
+        name: build
+        steps:
+            - uses: actions/checkout@v1
+            - uses: actions/setup-java@v1
+            with: 
+                java-version: '12.x'
+            - uses: subosito/flutter-action@v1
+            with:
+                channel: 'stable'
+            - name: Setting up flutter
+            # Set up flutter on master channel to allow for desktop testing/building
+            run: |
+                flutter channel master 
+                flutter upgrade
+                flutter config --enable-web --enable-linux-desktop
+                flutter precache --{web,linux}
+                flutter pub get
     
-    steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-java@v1
-      with: 
-        java-version: '12.x'
-    - uses: subosito/flutter-action@v1
-      with:
-        channel: 'stable'
-    - name: Setting up flutter
-      # Set up flutter on master channel to allow for desktop testing/building
-      run: |
-        flutter channel master 
-        flutter upgrade
-        flutter config --enable-web --enable-linux-desktop
-        flutter precache --{web,linux}
-        flutter pub get
-    - name: Run the integration tests
-      run: flutter test --coverage test/*_test.dart
-    - name: Coveralls Info
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.github_token }}
-        path-to-lcov: ./coverage/lcov.info
+    test:
+        needs: build
+        name: Integration Tests
+        run: flutter test --coverage test/*_test.dart
+
+    coverage:
+        needs: [build,test]
+        name: Coverall Reporting
+        uses: coverallsapp/github-action
+        with:
+            github-token: ${{ sercets.github-token }}
+            path-to-lcov: ./coverage/lcov.info
