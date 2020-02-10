@@ -5,7 +5,6 @@ import 'package:filer_flutter_desktop/state/files.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  _runCommand(String cmd, List<String> args) => Process.run(cmd, args);
   _getName(String file) =>
       file.substring(file.lastIndexOf(Platform.pathSeparator) + 1);
 

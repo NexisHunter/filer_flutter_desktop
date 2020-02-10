@@ -32,16 +32,13 @@ ThemeData createThemeData(List<int> colors, String font, bool darkMode) {
 }
 
 String getName({File file, Directory dir, String filePath}) {
-  var path = "";
-  if (file != null) {
-    path = file.path;
-  } else if (file != null) {
-    path = dir.path;
-  } else {
-    path = filePath;
-  }
+  var path = file?.path ?? dir?.path ?? filePath;
   return path.substring(path.lastIndexOf(Platform.pathSeparator) + 1);
 }
+
+String getExtension(String name) => (name.startsWith('.'))
+    ? name
+    : name.substring(0, name.lastIndexOf('.') + 1);
 
 extension TextController on TextEditingController {
   void setCursor(String text, int pos) {

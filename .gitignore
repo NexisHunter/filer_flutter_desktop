@@ -17,5 +17,3 @@ pubspec.lock
 
 codecov_generator_dart/
 coverage/
-# Ignore workflows until OAuth Support is added for Github Actions
-.github/workflows/

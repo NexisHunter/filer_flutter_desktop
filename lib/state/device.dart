@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 class Devices extends ChangeNotifier {
   Devices({String os})
       : _devices = [
-          if (Directory(_getMediaPath(os)).existsSync())
-            for (var device in Directory(_getMediaPath(os)).listSync())
+          if (Directory(_getMediaPath(os: os)).existsSync())
+            for (var device in Directory(_getMediaPath(os: os)).listSync())
               Device(path: device.path),
         ];
 
@@ -52,11 +52,10 @@ class Devices extends ChangeNotifier {
   ///
   /// [os] - The current operating system, maybe null. If null query the
   /// platform and use that to fetch the devices.
-  static String _getMediaPath(String os) {
-    // Determine if the os is null
-    os = os ?? Platform.operatingSystem;
+  static String _getMediaPath({String os}) {
+    os ??= Platform.operatingSystem;
 
-    switch (os) {
+    switch (os.toString()) {
       // TODO: Determine where windows houses the device mount points.
       case 'Windows':
         return '';
