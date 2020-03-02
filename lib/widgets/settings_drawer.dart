@@ -27,6 +27,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
           _switchShowFlag('Show Hidden Files', 'h', files, dir, prefs, true),
           _switchShowFlag('Show File Extensions', 'f', files, dir, prefs, true),
           _switchShowFlag('Dark Mode', 'd', files, dir, prefs, false),
+          _switchShowFlag('Display Mode', 'v', files, dir, prefs, true),
           _showScaling(prefs),
           _themeSetup(prefs),
         ],
@@ -122,20 +123,27 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
       case 'h':
         valueShown = prefs.showHidden;
         break;
+      case 'v':
+        valueShown = prefs.view;
+        break;
       default:
         valueShown = false;
         break;
     }
     return SwitchListTile(
       title: Text(
-        (valueShown) ? 'On' : 'Off',
+        (valueShown)
+            ? (switchValue == 'v') ? 'Default' : 'On'
+            : (switchValue == 'v') ? 'Compact' : 'Off',
         textAlign: TextAlign.end,
       ),
       value: (switchValue == 'd')
           ? prefs.darkMode
           : (switchValue == 'h')
               ? prefs.showHidden
-              : (switchValue == 'f') ? prefs.showFileExtensions : true,
+              : (switchValue == 'f')
+                  ? prefs.showFileExtensions
+                  : (switchValue == 'v') ? prefs.view : true,
       onChanged: (value) {
         switch (switchValue) {
           case 'd':
@@ -146,6 +154,9 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
             break;
           case 'h':
             prefs.showHidden = value;
+            break;
+          case 'v':
+            prefs.view = value;
             break;
           default:
             break;
@@ -202,7 +213,9 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
         ),
       ),
       children: <Widget>[
-        _generateColor(_getColor(attr), prefs),
+        ListTile(
+          title: _generateColor(_getColor(attr), prefs),
+        ),
       ],
       trailing: CircleColor(
         color: prefs.colors[_getColor(attr)],

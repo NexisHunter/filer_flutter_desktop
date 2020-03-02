@@ -26,13 +26,13 @@ main() async {
   Favs favs = Favs();
   Map<String, dynamic> userSettings;
 
-  var settingsFile = File('${prefs.home}.flutter_filer_desktop.json');
-  // If the preferences has been saved load the user adjusted settings.
-  if (await settingsFile.exists()) {
-    userSettings = json.decode(await settingsFile.readAsString());
-    prefs = Settings.fromMap(userSettings['prefs']);
-    favs = Favs.fromMap(userSettings['favs']['favourites']);
-  }
+  // var settingsFile = File('${prefs.home}.flutter_filer_desktop.json');
+  // // If the preferences has been saved load the user adjusted settings.
+  // if (await settingsFile.exists()) {
+  //   userSettings = json.decode(await settingsFile.readAsString());
+  //   prefs = Settings.fromMap(userSettings['prefs']);
+  //   favs = Favs.fromMap(userSettings['favs']['favourites']);
+  // }
 
   runApp(MyApp(prefs, favs));
 }

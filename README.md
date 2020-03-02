@@ -1,6 +1,4 @@
-# Filer  [![Coverage Status](https://coveralls.io/repos/github/NexisHunter/filer_flutter_desktop/badge.svg?branch=master)](https://coveralls.io/github/NexisHunter/filer_flutter_desktop?branch=master)
-
-A File Manager Written in Flutter for mobile. It started as my 4th year project Course during my time @ Algoma University.
+# Filer  [![Coverage Status](https://coveralls.io/repos/github/NexisHunter/filer_flutter_desktop/badge.svg?branch=master)](https://coveralls.io/github/NexisHunter/filer_flutter_desktop?branch=master) ![CI](https://github.com/NexisHunter/filer_flutter_desktop/workflows/CI/badge.svg)
 
 ## Introduction
 
@@ -11,9 +9,11 @@ applications.
 
 ## Goal
 
+The goal is to make a cross platform file manager written in Flutter. This is to allow a consistent look and feel across devices. Originally this was designed with the [Android-x86]() platform in mind but due to the nature of Flutter it allows for a broader audience to be targeted.
+<!-- 
 To make a file manager for the Android-x86 platform that is a bit more user-friendly as there are  
 some differences between the Android Os and the port. (In the realm of user interaction that is).
-
+-->
 ## Development Progress
 
 - [ ] Settings Menu
@@ -35,7 +35,11 @@ some differences between the Android Os and the port. (In the realm of user inte
   - [ ] Eject Functionality
   - [ ] Mount Functionality
 - [ ] Files list
-  - [x] Base Layout
+  - Layouts
+    - [ ] Compact View
+    - [X] Icon View
+    - [ ] COmfortable View
+    - [ ] tab/simultaneous directory viewing
   - [X] List all files (in a given directory)
   - [X] Icon based on mime-type
   - [ ] Opens app based on mime-type
@@ -45,10 +49,10 @@ some differences between the Android Os and the port. (In the realm of user inte
     - [ ] Copy File
     - [X] Rename File
     - [x] Create File
-  - [ ] tab/simultaneous directory viewing
 - [x] Data Persistence
   - [x] User preferences
   - [x] User Favourites
+  - [ ] Firebase *Possibly*
 
 ## Testing Progress
 

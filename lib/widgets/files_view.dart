@@ -39,7 +39,8 @@ class _FilesViewState extends State<FilesView> {
     );
   }
 
-  /// Builds the grid and displays the files within the current directory.
+  /// Displays the files within the current directory based off of the
+  /// preferred view mode.
   ///
   /// [prefs] -  The user settings to be applied to the files.
   /// [files] - The current list of files to be displayed.
@@ -48,6 +49,21 @@ class _FilesViewState extends State<FilesView> {
   /// [overlay] - Used for context menus. TODO: Refine me
   Widget _renderFiles(
       Settings prefs, Files files, DirChanger dir, Favs favs, dynamic overlay) {
+    // return (prefs.view)
+    //     ? _buildIconView(files, prefs, dir, favs, overlay)
+    //     : _buildCompactView(files, prefs, dir, favs, overlay);
+    return _buildCompactView(files, prefs, dir, favs, overlay);
+  }
+
+  /// Builds the grid view to display everything as an icon.
+  ///
+  /// [prefs] -  The user settings to be applied to the files.
+  /// [files] - The current list of files to be displayed.
+  /// [dir] - The current working directory.
+  /// [favs] - The current list of favourites.
+  /// [overlay] - Used for context menus. TODO: Refine me
+  GridView _buildIconView(
+      Files files, Settings prefs, DirChanger dir, Favs favs, dynamic overlay) {
     final grid = SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 60 * prefs.scale * 1.25,
         mainAxisSpacing: 4,
@@ -61,6 +77,121 @@ class _FilesViewState extends State<FilesView> {
         for (var item in files.files)
           _displayFile(item, prefs, dir, files, favs, overlay),
       ],
+    );
+  }
+
+  _buildCompactView(
+      Files files, Settings prefs, DirChanger dir, Favs favs, dynamic overlay) {
+    var columns = <DataColumn>[
+      DataColumn(
+        label: Text(
+          'Name',
+        ),
+      ),
+      DataColumn(
+        label: Text(
+          'Type',
+        ),
+      ),
+    ];
+    return _buildListTable(columns, files);
+  }
+
+  _buildListTable(List<DataColumn> columns, Files files) {
+    var rows = <DataRow>[
+      for (var file in files.files)
+        DataRow(
+          cells: <DataCell>[
+            DataCell(
+              Text(
+                file.fileName,
+              ),
+              onTap: () {
+                // TODO: Set to open
+              },
+            ),
+            DataCell(
+              Text(
+                file.extensionType,
+              ),
+            ),
+          ],
+        ),
+    ];
+    return DataTable(
+      columns: columns,
+      rows: rows,
+    );
+  }
+
+  _listView(Settings prefs, Files files, DirChanger dir, Favs favs, overlay) {
+    // final source = DataTableSource();
+    return SingleChildScrollView(
+      child: DataTable(
+        // return DataTable(
+        columns: <DataColumn>[
+          DataColumn(
+            label: Text(
+              'Name',
+            ),
+          ),
+          if (prefs.showFileExtensions)
+            DataColumn(
+              label: Text(
+                'Extension',
+              ),
+            ),
+          // DataColumn(
+          //   label: Text(
+          //     'File Type',
+          //   ),
+          // ),
+        ],
+        // rows:
+        // _getDataRows(files.files, prefs.showHidden, prefs.showFileExtensions),
+        rows: <DataRow>[
+          for (var file in files.files)
+            if (!prefs.showHidden)
+              _buildDataRow(file, prefs.showFileExtensions)
+            else if (prefs.showHidden)
+              _buildDataRow(file, prefs.showFileExtensions),
+        ],
+      ),
+    );
+  }
+
+  // _getDataRows(List<ListItem> files, bool hidden, bool exts) {
+  //   var filesList = <ListItem>[];
+  //   files.forEach((item) {
+  //     (item.name.startsWith('.') && !hidden) ? () {}() : filesList.add(item);
+  //   });
+  //   return (hidden)
+  //       ? [for (var file in files) _buildDataRow(file, exts)]
+  //       : [for (var file in filesList) _buildDataRow(file, exts)];
+  // }
+
+  DataRow _buildDataRow(ListItem file, bool extensions) {
+    // print(file.name);
+    bool _selected = false;
+    return DataRow(
+      cells: <DataCell>[
+        DataCell(
+          Text(file.fileName),
+          onTap: () => _selected = true,
+        ),
+        if (extensions)
+          DataCell(
+            Text(
+              file.extensionType,
+            ),
+          ),
+        // DataCell(
+        //   Text(file.extensionType),
+        // )
+      ],
+      // onSelectChanged: (selected) {
+      //   _selected = selected;
+      // },
     );
   }
 

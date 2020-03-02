@@ -1,10 +1,3 @@
-# Contributing
-
-**Note**: I (Nexishunter) currently work full time and am a fourth year university student I do monitor this repo quite a bit but there may be some times where I am unavailable for a few days, please don't take offence but I will get back to you asap. :smile:
-
-
-Questions/Concerns Email: nexishunter97@gmail.com
-
 ## Issue Formatting
 
 Title: `{AreaOfAffect}-{Number}: {Main Goal of Issue}`

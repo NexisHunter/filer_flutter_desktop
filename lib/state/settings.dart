@@ -27,6 +27,7 @@ class Settings extends ChangeNotifier {
     _showHidden = prefs['showHidden'] as bool;
     _showFileExtensions = prefs['showFileExtensions'] as bool;
     _scale = prefs['scale'] as double;
+    _defaultView = prefs['defaultView'] as bool;
   }
 
   /// The theme to be applied to the application.
@@ -106,6 +107,17 @@ class Settings extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// The default display style.
+  ///
+  /// [view] - The default is icon view
+  bool _defaultView = true;
+  bool get view => _defaultView;
+  set view(bool view) {
+    // TODO: Set it so that there are more display types, if they are added.
+    _defaultView = view;
+    notifyListeners();
+  }
+
   /// The current platform being used.
   ///
   /// [os] - The current operating system the user is running.
@@ -129,6 +141,7 @@ class Settings extends ChangeNotifier {
       "showHidden": _showHidden,
       "showFileExtensions": _showFileExtensions,
       "scale": _scale,
+      "defaultView": view,
       'fontFamily':
           'Roboto' // Temporarily set to Roboto until flutter-desktop-embedding is improved to better support other fonts
     };

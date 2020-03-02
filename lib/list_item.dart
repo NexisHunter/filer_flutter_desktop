@@ -8,7 +8,9 @@ import 'package:filer_flutter_desktop/utils.dart';
 class ListItem extends Comparable<ListItem> {
   /// Default contructor to build the base item so that it can be assigned into
   /// a list.
-  ListItem(this.name, this.type, this.path) : this.fileName = name;
+  ListItem(this.name, this.type, this.path)
+      : this.fileName = name,
+        this.extensionType = getExtension(name);
 
   /// Uses a json object to build the list item.
   ListItem.fromMap(Map<String, dynamic> json) {
@@ -16,12 +18,14 @@ class ListItem extends Comparable<ListItem> {
     fileName = json['name'];
     type = Type.values[json['type'] as int];
     path = json['path'];
+    extensionType = json['extension'];
   }
 
   String name = "";
   String fileName = "";
   Type type = Type.File;
   String path = "";
+  String extensionType = "";
 
   int compareTo(other) {
     return path.compareTo(other.path);
@@ -33,7 +37,8 @@ class ListItem extends Comparable<ListItem> {
       "name": name,
       "fileName": fileName,
       "type": type.index.toString(),
-      "path": path
+      "path": path,
+      "extension": extensionType
     };
   }
 
