@@ -1,4 +1,4 @@
-# Filer  [![Coverage Status](https://coveralls.io/repos/github/NexisHunter/filer_flutter_desktop/badge.svg?branch=master)](https://coveralls.io/github/NexisHunter/filer_flutter_desktop?branch=master)
+# Filer  [![Coverage Status](https://coveralls.io/repos/github/NexisHunter/filer_flutter_desktop/badge.svg?branch=master)](https://coveralls.io/github/NexisHunter/filer_flutter_desktop?branch=master) ![CI](https://github.com/NexisHunter/filer_flutter_desktop/workflows/CI/badge.svg)
 
 ## Introduction
 
